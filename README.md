@@ -49,25 +49,25 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
     - error
 
 #### Event: 'sessionStart'
-Alias for sessionStart event of Receiver.
+Alias for [sessionStart event of Receiver](#event-sessionstart-1).
 
 #### Event: 'sessionEnd'
-- Parser parser
+- [Parser](#class-parser) parser
 
-Alias for sessionEnd event of Receiver.
+Alias for [sessionEnd event of Receiver](#event-sessionend-1).
 
 #### Event: 'parseStart'
-Alias for parseStart event of Parser.
+Alias for [parseStart event of Parser](#event-parsestart-1).
 
 #### Event: 'parseEnd'
 - Object mail
 
-Alias for parseEnd event of Parser.
+Alias for [parseEnd event of Parser](#event-parseend-1).
 
 #### Event: 'receive'
 - Object mail
 
-Alias for parseEnd event.
+Another alias for [parseEnd event of Parser](#event-parseend-1).
 
 ---
 
@@ -77,7 +77,7 @@ Alias for parseEnd event.
 Emitted when the server was connected to new client or client made new session (end of DATA or RSET).
 
 #### Event: 'sessionEnd'
-- Parser parser
+- [Parser](#class-parser) parser
 
 Emitted when the server has fully recevied a mail or the client made new session (end of `DATA` or `RSET`). Not emitted when the connection has been closed before any mail was received or session was reset.
 
