@@ -29,7 +29,7 @@ $ git clone https://github.com/g6123/node-smtpd-lite.git smtpd-lite
 
 ### Dependency
  - `smtpd-lite` uses [new stream API (stream2)](http://blog.nodejs.org/2012/12/20/streams2/), and is supported for Node.js v0.10+.
- - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) is required for charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).
+ - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) can be (optionally) used for auto charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).
 
 ## Usage
 
