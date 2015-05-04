@@ -29,7 +29,7 @@ $ git clone https://github.com/g6123/node-smtpd-lite.git smtpd-lite
 
 ### Dependency
  - `smtpd-lite` uses [new stream API (stream2)](http://blog.nodejs.org/2012/12/20/streams2/), and is supported for Node.js v0.10+.
- - Also [node-icu-charset-detector](/mooz/node-icu-charset-detector) is required for charset detection, which has dependency on `libicu`. Install guide is [here](/mooz/node-icu-charset-detector#installing-icu).
+ - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) is required for charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).
 
 ## Usage
 
@@ -111,9 +111,9 @@ Emitted when the first line to be parsed has been received.
 ```
 - **header** : Object containing headers of received mail. All keys are converted to lowercase.
 - **body** : Object containing body of received mail.
-  - **stream** : Readable stream of temporary body file.
+  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of temporary body file.
   - **length**: Total size of stream.
 - **multiparts** : Array of mime multiparts of received mail.
   - **header** : Object containing headers of each multipart. All keys are converted to lowercase.
-  - **stream** : Readable stream of each temporary multipart file.
+  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of each temporary multipart file.
   - **length**: Total size of stream.
