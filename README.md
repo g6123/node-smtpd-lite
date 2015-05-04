@@ -3,14 +3,14 @@ Simple SMTP mail receiver for Node.js.
 
 ## Quick example
 ```js
-var Smtpd = require('smtpd-lite');
+var Server = require('smtpd-lite');
 
-var smtpd = new Smtpd({
+var server = new Server({
   host: 'mail.example.com',
   domain: 'example.com'
 });
 
-smtpd.on('receive', function(mail) {
+server.on('receive', function(mail) {
   console.log(mail);
 });
 
