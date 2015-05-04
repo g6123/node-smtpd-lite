@@ -74,7 +74,7 @@ Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser)
 ### Class: Receiver
 
 #### Event: 'sessionStart'
-Emitted when the server was connected to new client or client made new session (end of DATA or RSET).
+Emitted when the server was connected to new client or client made new session (end of `DATA` or `RSET`).
 
 #### Event: 'sessionEnd'
 - [Parser](#class-parser) parser
