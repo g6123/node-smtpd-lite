@@ -49,25 +49,25 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
     - error
 
 #### Event: 'sessionStart'
-Alias for [sessionStart event of Receiver](#event-sessionstart-1).
+Alias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-receiver).
 
 #### Event: 'sessionEnd'
 - [Parser](#class-parser) parser
 
-Alias for [sessionEnd event of Receiver](#event-sessionend-1).
+Alias for [sessionEnd event](#event-sessionend-1) of [Receiver](#class-receiver).
 
 #### Event: 'parseStart'
-Alias for [parseStart event of Parser](#event-parsestart-1).
+Alias for [parseStart event](#event-parsestart-1) of [Parser](#class-parser).
 
 #### Event: 'parseEnd'
 - Object mail
 
-Alias for [parseEnd event of Parser](#event-parseend-1).
+Alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).
 
 #### Event: 'receive'
 - Object mail
 
-Another alias for [parseEnd event of Parser](#event-parseend-1).
+Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).
 
 ---
 
