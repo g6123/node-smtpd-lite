@@ -1,23 +1,28 @@
 {
-  "name": "smtpd-lite",
-  "main": "lib/server.js",
-  "version": "0.1.6",
-  "description": "A simple SMTP server.",
-  "homepage": "https://github.com/g6123/node-smtpd-lite",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/g6123/node-smtpd-lite.git"
-  },
-  "author": {
-    "name": "cumul",
-    "email": "gg6123@naver.com"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "iconv": "^2.1.6",
-    "async": "^0.9.0",
-    "underscore": "^1.8.3",
-    "winston": "^1.0.0",
-    "mimelib": "^0.2.19"
-  }
+	"name": "smtpd-lite",
+	"main": "lib/server.js",
+	"version": "0.1.7",
+	"description": "A simple SMTP server.",
+	"keywords": [
+		"smtp",
+		"server",
+		"lite",
+		"receiver"
+	],
+	"homepage": "https://github.com/g6123/node-smtpd-lite",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/g6123/node-smtpd-lite.git"
+	},
+	"author": {
+		"name": "cumul",
+		"email": "gg6123@naver.com"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"iconv": "^2.1.6",
+		"async": "^0.9.0",
+		"underscore": "^1.8.3",
+		"winston": "^1.0.0"
+	}
 }
