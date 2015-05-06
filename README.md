@@ -29,7 +29,7 @@ $ git clone https://github.com/g6123/node-smtpd-lite.git smtpd-lite
 
 ### Dependency
  - `smtpd-lite` uses [new stream API (stream2)](http://blog.nodejs.org/2012/12/20/streams2/), and is supported for Node.js v0.10+.
- - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) can be (optionally) used for auto charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).
+ - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) can be optionally used for auto charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).
 
 ## Usage
 
@@ -49,6 +49,8 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
     - error
 
 #### Event: 'sessionStart'
+- [net.Socket](https://nodejs.org/api/net.html#net_class_net_socket) socket
+
 Alias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-receiver).
 
 #### Event: 'sessionEnd'
@@ -57,15 +59,17 @@ Alias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-recei
 Alias for [sessionEnd event](#event-sessionend-1) of [Receiver](#class-receiver).
 
 #### Event: 'parseStart'
+- [Parser](#class-parser) parser
+
 Alias for [parseStart event](#event-parsestart-1) of [Parser](#class-parser).
 
 #### Event: 'parseEnd'
-- Object mail
+- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail
 
 Alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).
 
 #### Event: 'receive'
-- Object mail
+- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail
 
 Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).
 
@@ -90,11 +94,12 @@ This class inherits [stream.Transform](https://nodejs.org/api/stream.html#stream
 Emitted when the first line to be parsed has been received.
 
 #### Event: 'parseEnd'
-- Object mail
+- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail
 
 `mail` argument is an object with following data :
 ```js
 {
+  id: String,
   header: { ... },
   body: {
     stream: stream.Readable stream,
@@ -109,6 +114,7 @@ Emitted when the first line to be parsed has been received.
   ]
 }
 ```
+- **id**: Unique string of the session where the mail was received.
 - **header** : Object containing headers of received mail. All keys are converted to lowercase.
 - **body** : Object containing body of received mail.
   - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of temporary body file.
