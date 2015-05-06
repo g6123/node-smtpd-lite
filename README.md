@@ -40,7 +40,7 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
 `options` defines all settings for server and supoorts following properties :
   - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : '127.0.0.1')
   - **domain** : Domain name displayed on greeting message (default : 'localhost')
-  - **defaultCharset** : Charset to use for as default for parsing mails (default : 'UTF-8')
+  - **defaultCharset** : Charset to use as default for parsing mails (default : 'UTF-8')
   - **tempDir** : Path to temporary directory where body and mulitpart data files are stored (default : './tmp/')
   - **logFile** : Path to log file. When set as false, log file won't be created. (default : false)
   - **logLevel** : Log level for logging - both for stdout and file (default : 'info')
