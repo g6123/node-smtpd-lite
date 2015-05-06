@@ -39,14 +39,18 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
 #### new Server(options)
 `options` defines all settings for server and supoorts following properties :
   - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : '127.0.0.1')
-  - **domain** : Domain name displayed on greeting message. (default : 'localhost')
-  - **tempDir** : Path to temporary directory where body and mulitpart data files are stored. (default : './tmp/')
+  - **domain** : Domain name displayed on greeting message (default : 'localhost')
+  - **defaultCharset** : Charset to use for as default for parsing mails (default : 'UTF-8')
+  - **tempDir** : Path to temporary directory where body and mulitpart data files are stored (default : './tmp/')
   - **logFile** : Path to log file. When set as false, log file won't be created. (default : false)
-  - **logLevel** : Log level for logging - both for stdout and file. (default : 'info')
+  - **logLevel** : Log level for logging - both for stdout and file (default : 'info')
     - debug : Display all logs including all messages from/to client.
     - info
     - warn
     - error
+
+#### server.removeTemp([all])
+Removes temporary files in the directory configured with `config['tempDir']`. If `all` argument is given `true`, it removes all files in the directory. Otherwise, it removes only empty (zero-size) files.
 
 #### Event: 'sessionStart'
 - [net.Socket](https://nodejs.org/api/net.html#net_class_net_socket) socket
