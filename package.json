@@ -1,7 +1,7 @@
 {
 	"name": "smtpd-lite",
 	"main": "lib/server.js",
-	"version": "0.1.12",
+	"version": "0.1.13",
 	"description": "A simple SMTP server.",
 	"keywords": [
 		"smtp",
@@ -17,6 +17,9 @@
 	"author": {
 		"name": "cumul",
 		"email": "gg6123@naver.com"
+	},
+	"engines": {
+		"node": ">=0.10.0"
 	},
 	"license": "MIT",
 	"dependencies": {
