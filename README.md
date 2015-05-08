@@ -38,8 +38,14 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
 
 #### new Server(options)
 `options` defines all settings for server and supoorts following properties :
-  - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : '127.0.0.1')
-  - **domain** : Domain name displayed on greeting message (default : 'localhost')
+  - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : `'127.0.0.1'`)
+  - **domain** : Domain name displayed on greeting message (default : `'localhost'`)
+  - **tls**: When set this `false`, all TLS features are disabled. (default : `false`)
+    - **force** : Whether to force client to use TLS (default : `false`)
+    - **key** : A [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer) containing the private key of the server in PEM format. (Could be an array of keys). (Required if you use TLS)
+    - **cert** : A [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer) containing the certificate key of the server in PEM format. (Could be an array of certs). (Required if you use TLS)
+    - **ca**: ca: An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) of [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)s or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer)s of trusted certificates in PEM format. If this is omitted several well known "root" CAs will be used, like VeriSign. These are used to authorize connections.
+    - ..and more TLS security context options. For more details, see [here](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_details).
   - **defaultCharset** : Charset to use as default for parsing mails (default : 'UTF-8')
   - **tempDir** : Path to temporary directory where body and mulitpart data files are stored (default : './tmp/')
   - **logFile** : Path to log file. When set as false, log file won't be created. (default : false)
@@ -62,6 +68,17 @@ Alias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-recei
 
 Alias for [sessionEnd event](#event-sessionend-1) of [Receiver](#class-receiver).
 
+#### Event: 'secure'
+- [tls.TLSSocket](https://nodejs.org/api/tls.html#tls_class_tls_tlssocket) cleartext
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) authError
+
+Alias for [secure event](https://nodejs.org/api/tls.html#tls_event_secure) of [tls.SecurePair](https://nodejs.org/api/tls.html#tls_class_securepair)
+
+#### Event: 'scureError'
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) error
+
+Alias for error event of [tls.SecurePair](https://nodejs.org/api/tls.html#tls_class_securepair)
+
 #### Event: 'parseStart'
 - [Parser](#class-parser) parser
 
@@ -80,6 +97,10 @@ Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser)
 ---
 
 ### Class: Receiver
+
+#### receiver.replaceSocket(socket)
+
+Replace the socket [Receiver](#class-receiver) object uses. Also it removes event listeners registered by [Receiver](#class-receiver) from the old socket, and set the same listeners on the new socket.
 
 #### Event: 'sessionStart'
 Emitted when the server was connected to new client or client made new session (end of `DATA` or `RSET`).

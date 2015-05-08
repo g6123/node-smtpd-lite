@@ -1,29 +1,39 @@
 {
-	"name": "smtpd-lite",
-	"main": "lib/server.js",
-	"version": "0.1.15",
-	"description": "A simple SMTP server.",
-	"keywords": [
-		"smtp",
-		"server",
-		"lite",
-		"receiver"
-	],
-	"homepage": "https://github.com/g6123/node-smtpd-lite",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/g6123/node-smtpd-lite.git"
-	},
-	"author": {
-		"name": "cumul",
-		"email": "gg6123@naver.com"
-	},
-	"engines": {
-		"node": ">=0.10.0"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"iconv": "^2.1.6",
-		"winston": "^1.0.0"
-	}
+  "name": "smtpd-lite",
+  "main": "./lib/index.js",
+  "version": "0.1.16",
+  "description": "A SMTP server for Node.js",
+  "keywords": [
+    "smtp",
+    "server",
+    "lite",
+    "receiver"
+  ],
+  "homepage": "https://github.com/g6123/node-smtpd-lite",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/g6123/node-smtpd-lite.git"
+  },
+  "author": {
+    "name": "cumul",
+    "email": "gg6123@naver.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "iconv": "^2.1.6",
+    "winston": "^1.0.0"
+  },
+  "readme": "# node-smtpd-lite\nSimple SMTP mail receiver for Node.js.\n\n## Quick example\n```js\nvar Server = require('smtpd-lite');\n\nvar server = new Server({\n  host: 'mail.example.com',\n  domain: 'example.com'\n});\n\nserver.on('receive', function(mail) {\n  console.log(mail);\n});\n\nserver.listen(25);\n```\n\n## Installation\n\n```bash\n# Install with npm\n$ npm install smtpd-lite\n\n# Install from source code\n$ git clone https://github.com/g6123/node-smtpd-lite.git smtpd-lite\n```\n\n### Dependency\n - `smtpd-lite` uses [new stream API (stream2)](http://blog.nodejs.org/2012/12/20/streams2/), and is supported for Node.js v0.10+.\n - Also [node-icu-charset-detector](https://github.com/mooz/node-icu-charset-detector) can be optionally used for auto charset detection, which has dependency on `libicu`. Install guide is [here](https://github.com/mooz/node-icu-charset-detector#installing-icu).\n\n## Usage\n\n### Class: Server\nThis class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_server). You can use all methods and events from net.Server such as `server.listen()`, `server.close()`, `server.on('error', function(error) { ... })`, etc.\n\n#### new Server(options)\n`options` defines all settings for server and supoorts following properties :\n  - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : '127.0.0.1')\n  - **domain** : Domain name displayed on greeting message (default : 'localhost')\n  - **defaultCharset** : Charset to use as default for parsing mails (default : 'UTF-8')\n  - **tempDir** : Path to temporary directory where body and mulitpart data files are stored (default : './tmp/')\n  - **logFile** : Path to log file. When set as false, log file won't be created. (default : false)\n  - **logLevel** : Log level for logging - both for stdout and file (default : 'info')\n    - debug : Display all logs including all messages from/to client.\n    - info\n    - warn\n    - error\n\n#### server.removeTemp([all])\nRemoves temporary files in the directory configured with `config['tempDir']`. If `all` argument is given `true`, it removes all files in the directory. Otherwise, it removes only empty (zero-size) files.\n\n#### Event: 'sessionStart'\n- [net.Socket](https://nodejs.org/api/net.html#net_class_net_socket) socket\n\nAlias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-receiver).\n\n#### Event: 'sessionEnd'\n- [Parser](#class-parser) parser\n\nAlias for [sessionEnd event](#event-sessionend-1) of [Receiver](#class-receiver).\n\n#### Event: 'parseStart'\n- [Parser](#class-parser) parser\n\nAlias for [parseStart event](#event-parsestart-1) of [Parser](#class-parser).\n\n#### Event: 'parseEnd'\n- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail\n\nAlias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).\n\n#### Event: 'receive'\n- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail\n\nAnother alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser).\n\n---\n\n### Class: Receiver\n\n#### Event: 'sessionStart'\nEmitted when the server was connected to new client or client made new session (end of `DATA` or `RSET`).\n\n#### Event: 'sessionEnd'\n- [Parser](#class-parser) parser\n\nEmitted when the server has fully recevied a mail or the client made new session (end of `DATA` or `RSET`). Not emitted when the connection has been closed before any mail was received or session was reset.\n\n---\n\n### Class: Parser\nThis class inherits [stream.Transform](https://nodejs.org/api/stream.html#stream_class_stream_transform). You can use all methods and events from stream.Transform such as `parser.pipe()`, `parser.end()`, `parser.on('error', function(error) { ... })`, etc.\n\n#### Event: 'parseStart'\nEmitted when the first line to be parsed has been received.\n\n#### Event: 'parseEnd'\n- [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail\n\n`mail` argument is an object with following data :\n```js\n{\n  id: String,\n  header: { ... },\n  body: {\n    stream: stream.Readable stream,\n    length: Number\n  },\n  multiparts: [\n    {\n      header: { ... },\n      stream: stream.Readable stream,\n      length: Number\n    }, ...\n  ]\n}\n```\n- **id**: Unique string of the session where the mail was received.\n- **header** : Object containing headers of received mail. All keys are converted to lowercase.\n- **body** : Object containing body of received mail.\n  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of temporary body file.\n  - **length**: Total size of stream.\n- **multiparts** : Array of mime multiparts of received mail.\n  - **header** : Object containing headers of each multipart. All keys are converted to lowercase.\n  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of each temporary multipart file.\n  - **length**: Total size of stream.\n",
+  "readmeFilename": "README.md",
+  "gitHead": "87f1649be3930685c3149dfe7bae5c42e95674c4",
+  "bugs": {
+    "url": "https://github.com/g6123/node-smtpd-lite/issues"
+  },
+  "_id": "smtpd-lite@0.1.15",
+  "scripts": {},
+  "_shasum": "78cbacea5a57364033d6cb8db1f5597229c09d1f",
+  "_from": "smtpd-lite@*"
 }
