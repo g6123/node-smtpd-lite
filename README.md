@@ -48,7 +48,7 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
     - ..and more TLS security context options. For more details, see [here](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_details).
   - **defaultCharset** : Charset to use as default for parsing mails (default : 'UTF-8')
   - **tempDir** : Path to temporary directory where body and mulitpart data files are stored (default : './tmp/')
-  - **logFile** : Path to log file. When set as false, log file won't be created. (default : false)
+  - **logFile** : Path to log file. When set `false`, log file won't be created. (default : false)
   - **logLevel** : Log level for logging - both for stdout and file (default : 'info')
     - debug : Display all logs including all messages from/to client.
     - info
@@ -100,7 +100,7 @@ Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser)
 
 #### receiver.replaceSocket(socket)
 
-Replace the socket [Receiver](#class-receiver) object uses. Also it removes event listeners registered by [Receiver](#class-receiver) from the old socket, and set the same listeners on the new socket.
+Replaces the socket [Receiver](#class-receiver) object uses. Also it removes event listeners registered by [Receiver](#class-receiver) from the old socket, and set the same listeners on the new socket.
 
 #### Event: 'sessionStart'
 Emitted when the server was connected to new client or client made new session (end of `DATA` or `RSET`).
