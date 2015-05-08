@@ -38,10 +38,10 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
 
 #### new Server(options)
 `options` defines all settings for server and supoorts following properties :
-  - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : `'127.0.0.1'`)
-  - **domain** : Domain name displayed on greeting message (default : `'localhost'`)
-  - **tls**: When set this `false`, all TLS features are disabled. (default : `false`)
-    - **force** : Whether to force client to use TLS (default : `false`)
+  - **host** : Hostname displayed on greeting message and respond to HELO/EHLO command. Server can be runned on different hostname. (default : '127.0.0.1')
+  - **domain** : Domain name displayed on greeting message (default : 'localhost')
+  - **tls**: When set this `false`, all TLS features are disabled. (default : false)
+    - **force** : Whether to force client to use TLS (default : false)
     - **key** : A [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer) containing the private key of the server in PEM format. (Could be an array of keys). (Required if you use TLS)
     - **cert** : A [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer) containing the certificate key of the server in PEM format. (Could be an array of certs). (Required if you use TLS)
     - **ca**: ca: An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) of [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)s or [buffer](https://nodejs.org/api/buffer.html#buffer_class_buffer)s of trusted certificates in PEM format. If this is omitted several well known "root" CAs will be used, like VeriSign. These are used to authorize connections.
