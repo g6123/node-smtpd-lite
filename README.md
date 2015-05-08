@@ -1,5 +1,5 @@
 # node-smtpd-lite
-Simple SMTP mail receiver for Node.js.
+An uncomplicated SMTP mail receiver for Node.js.
 
 ## Quick example
 ```js
