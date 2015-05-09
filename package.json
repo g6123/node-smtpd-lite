@@ -1,7 +1,7 @@
 {
   "name": "smtpd-lite",
   "main": "./lib/server.js",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "An uncomplicated SMTP server for Node.js",
   "keywords": [
     "smtp",
