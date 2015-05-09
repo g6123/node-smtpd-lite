@@ -56,7 +56,7 @@ This class inherits [net.Server](https://nodejs.org/api/net.html#net_class_net_s
     - error
 
 #### server.removeTemp([all])
-Removes temporary files in the directory configured with `config['tempDir']`. If `all` argument is given `true`, it removes all files in the directory. Otherwise, it removes only empty (zero-size) files.
+Removes temporary files in the directory configured by `config['tempDir']`. If `all` argument is given `true`, it removes all files in the directory. Otherwise, it removes only empty (zero-size) files.
 
 #### Event: 'sessionStart'
 - [net.Socket](https://nodejs.org/api/net.html#net_class_net_socket) socket
@@ -67,17 +67,6 @@ Alias for [sessionStart event](#event-sessionstart-1) of [Receiver](#class-recei
 - [Parser](#class-parser) parser
 
 Alias for [sessionEnd event](#event-sessionend-1) of [Receiver](#class-receiver).
-
-#### Event: 'secure'
-- [tls.TLSSocket](https://nodejs.org/api/tls.html#tls_class_tls_tlssocket) cleartext
-- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) authError
-
-Alias for [secure event](https://nodejs.org/api/tls.html#tls_event_secure) of [tls.SecurePair](https://nodejs.org/api/tls.html#tls_class_securepair)
-
-#### Event: 'scureError'
-- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) error
-
-Alias for error event of [tls.SecurePair](https://nodejs.org/api/tls.html#tls_class_securepair)
 
 #### Event: 'parseStart'
 - [Parser](#class-parser) parser
@@ -100,15 +89,15 @@ Another alias for [parseEnd event](#event-parseend-1) of [Parser](#class-parser)
 
 #### receiver.replaceSocket(socket)
 
-Replaces the socket [Receiver](#class-receiver) object uses. Also it removes event listeners registered by [Receiver](#class-receiver) from the old socket, and set the same listeners on the new socket.
+Replaces the socket which the receiver uses. Also it removes, from the old socket, event listeners registered by receiver, and sets the same listeners on the new socket.
 
 #### Event: 'sessionStart'
-Emitted when the server was connected to new client or client made new session (end of `DATA` or `RSET`).
+Emitted when the server was connected to a new client or the client made new session (`RSET` or the end of `DATA`.)
 
 #### Event: 'sessionEnd'
 - [Parser](#class-parser) parser
 
-Emitted when the server has fully recevied a mail or the client made new session (end of `DATA` or `RSET`). Not emitted when the connection has been closed before any mail was received or session was reset.
+Emitted when the server reached the end of a mail or the client made new session (`RSET` or the end of `DATA`.) Not emitted when the connection has been closed or session been reset before any mail had been received.
 
 ---
 
@@ -116,12 +105,12 @@ Emitted when the server has fully recevied a mail or the client made new session
 This class inherits [stream.Transform](https://nodejs.org/api/stream.html#stream_class_stream_transform). You can use all methods and events from stream.Transform such as `parser.pipe()`, `parser.end()`, `parser.on('error', function(error) { ... })`, etc.
 
 #### Event: 'parseStart'
-Emitted when the first line to be parsed has been received.
+Emitted when the first line to be parsed is received.
 
 #### Event: 'parseEnd'
 - [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) mail
 
-`mail` argument is an object with following data :
+`mail` argument is an object with following properties :
 ```js
 {
   id: String,
@@ -139,12 +128,12 @@ Emitted when the first line to be parsed has been received.
   ]
 }
 ```
-- **id**: Unique string of the session where the mail was received.
-- **header** : Object containing headers of received mail. All keys are converted to lowercase.
-- **body** : Object containing body of received mail.
-  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of temporary body file.
-  - **length**: Total size of stream.
-- **multiparts** : Array of mime multiparts of received mail.
-  - **header** : Object containing headers of each multipart. All keys are converted to lowercase.
-  - **stream** : [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of each temporary multipart file.
-  - **length**: Total size of stream.
+- **id**: An unique string of the session where the mail was received.
+- **header** : An object containing headers of the received mail. All keys are converted to the lowercase.
+- **body** : An object containing a body of the received mail.
+  - **stream** : A [readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of the temporary body file.
+  - **length**: Total size of the data written on `stream`.
+- **multiparts** : An array of mime multiparts of the received mail.
+  - **header** : An object containing headers of each multipart. All keys are converted to the lowercase.
+  - **stream** : A [readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) of each temporary multipart file.
+  - **length**: Total size of the data written on each `stream`.
