@@ -120,13 +120,13 @@ There are four possible states.
 #### receiver.to
 
 #### Event: 'sessionStart'
-Emitted when the server was connected to a new client or the client made new session (`RSET` or the end of `DATA`.)
+Emitted when the server was connected to a new client or the client made a new session (`RSET` or the end of `DATA`.)
 
 #### Event: 'auth'
 - [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) data
 - [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function) function callback(error) { ... }
 
-Emitted when the client sends `AUTH` command. Until `callback` is called, all data chunks from the client is processed only by auth event listener. When `callback` is called with `error`, the receiver will consider the authentication has failed. Below is an example code.
+Emitted when the client sends `AUTH` command. Until `callback` is called, all data chunks from the client is processed only by event listener listening on this auth event. When `callback` is called with `error`, the receiver will consider the authentication has failed. Below is an example code.
 
 ```js
 var Server = require('smtpd-lite');
@@ -159,6 +159,7 @@ server.on('sessionStart', function(receiver) {
 	});
 
 });
+```
 
 #### Event: 'sessionEnd'
 - [Parser](#class-parser) parser
